@@ -51,4 +51,10 @@ sensorController.addData = (req, res) => {
   }
 };
 
+sensorController.getConfig = (req, res) => {
+  res.header('Content-Type', 'application/json');
+  res.send(JSON.stringify(config));
+};
+
+
 module.exports = sensorController;
