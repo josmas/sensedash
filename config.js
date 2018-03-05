@@ -1,13 +1,24 @@
 const config = module.exports;
 
+const jsonConfig = require('./config.json');
+
+const loginData = {
+  host: jsonConfig.host,
+  username: jsonConfig.username,
+  password: jsonConfig.password,
+  dbname: jsonConfig.dbname,
+  port: jsonConfig.port,
+  dialect: jsonConfig.dialect,
+};
+
 config.db = {
-  user: 'root',
-  password: 'Pylly6',
-  name: 'nodejstest',
+  user: loginData.username,
+  password: jsonConfig.password,
+  name: loginData.dbname,
 };
 
 config.db.details = {
-  host: 'localhost',
-  port: 3306,
-  dialect: 'mysql',
+  host: loginData.host,
+  port: loginData.port,
+  dialect: loginData.dialect,
 };

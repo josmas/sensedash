@@ -16,16 +16,20 @@ const sensorController = {};
 
 sensorController.addData = (req, res) => {
   if (!req.body.timestamp) {
-    res.json({
-      message: 'Please provide sensor timestamp',
+    res.status(400).json({
+      message: 'Bad request: timestamp not defined.',
     });
   } else if (!req.body.device_id) {
-    res.json({
-      message: 'Please provide device_id',
+    res.status(400).json({
+      message: 'Bad request: device_id not defined.',
     });
   } else if (!req.body.data) {
-    res.json({
-      message: 'Please provide data',
+    res.status(400).json({
+      message: 'Bad request: data not defined.',
+    });
+  } else if (!req.body.table) {
+    res.status(400).json({
+      message: 'Bad request: table not defined.',
     });
   } else {
     db.sync().then(() => {

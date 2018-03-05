@@ -1,0 +1,8 @@
+{
+  "host": "localhost",
+  "dbname": "nodejstest",
+  "username": "root",
+  "password": "Pylly6",
+  "port": 3306,
+  "dialect": "mysql"
+}
