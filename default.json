@@ -1,0 +1,10 @@
+{
+  "Database": {
+    "dbConfig": {
+      "host": "localhost",
+      "username": "root",
+      "password": "pylly6",
+      "port": 5984
+    }
+  }
+}

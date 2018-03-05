@@ -1,0 +1,4 @@
+task1 : save post request to database with nodejs script
+there has to be defined tables
+
+if table doesnt exist it is created
