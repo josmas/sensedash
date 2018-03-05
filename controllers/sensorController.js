@@ -56,5 +56,4 @@ sensorController.getConfig = (req, res) => {
   res.send(JSON.stringify(config));
 };
 
-
 module.exports = sensorController;

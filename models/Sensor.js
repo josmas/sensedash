@@ -30,7 +30,7 @@ const modelDefinition = {
 const modelOptions = {
 };
 
-// Define the User model.
+// Define the model.
 const SensorModel = db.define('Test', modelDefinition, modelOptions);
 
 db.sync({ force: false })
