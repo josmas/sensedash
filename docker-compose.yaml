@@ -1,0 +1,35 @@
+version: "2.1"
+services:
+  db:
+    image: mysql/mysql-server
+    container_name: mysql
+    command: mysqld --user=root --verbose
+    ports:
+      - "3306:3306"
+      - "33060:33060"
+    environment:
+      MYSQL_DATABASE: "defaultdb"
+      MYSQL_USER: "root"
+      MYSQL_PASSWORD: "abc123"
+      MYSQL_ROOT_PASSWORD: "abc123"
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_ROOT_HOST: "172.17.0.3"
+      restart: always
+  backend:
+    image: "node:8"
+    user: "node"
+    working_dir: /home/node/app
+    environment:
+      - NODE_ENV=production
+      - DB_HOST=mysql
+    volumes:
+      - ./:/home/node/app
+    ports:
+          - "3000:3000"
+    depends_on:
+        db:
+             condition: service_healthy
+    links:
+      - db
+    command: bash -c "npm install && npm start"
+    restart: always

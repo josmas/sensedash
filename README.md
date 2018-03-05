@@ -1,5 +1,8 @@
 # sensedash
 
+```console
+$ docker-compose up
+```
 
 ## Requirements
 
