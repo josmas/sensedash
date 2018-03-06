@@ -1,19 +1,9 @@
-const Sensor = require('../models/Sensor');
+const knex = require('knex')(require('../config'));
 
-const Sequelize = require('sequelize');
-
-const config = require('../config');
-
-const db = new Sequelize(
-  config.db.name,
-  config.db.user,
-  config.db.password,
-  config.db.details,
-);
-
-// The authentication controller.
+// The sensorController controller.
 const sensorController = {};
 
+// todo: proper error handling!
 sensorController.addData = (req, res) => {
   if (!req.body.timestamp) {
     res.status(400).json({
@@ -32,28 +22,31 @@ sensorController.addData = (req, res) => {
       message: 'Bad request: table not defined.',
     });
   } else {
-    db.sync().then(() => {
-      const newSensor = {
+    // eslint-disable-next-line consistent-return
+    knex.schema.hasTable(req.body.table).then((exists) => {
+      if (!exists) { // create table
+        return knex.schema.createTable(req.body.table, (t) => {
+          t.increments('id').primary();
+          t.string('timestamp', 100);
+          t.string('device_id', 100);
+          t.json('data');
+        });
+      }
+      knex(req.body.table).insert({
         timestamp: req.body.timestamp,
         device_id: req.body.device_id,
         data: req.body.data,
-      };
-      return Sensor.create(newSensor).then(() => {
-        res.status(201).json({
-          message: 'Sensor data added!',
+      })
+        .then((resultId) => {
+          res.status(201).json({ success: true, message: `Inserted with Id: ${resultId}` });
         });
-      });
-    }).catch((error) => {
-      res.status(403).json({
-        message: error,
-      });
     });
   }
 };
 
 sensorController.getConfig = (req, res) => {
   res.header('Content-Type', 'application/json');
-  res.send(JSON.stringify(config));
+  res.send(JSON.stringify(knex));
 };
 
 module.exports = sensorController;
