@@ -22,6 +22,7 @@ sensorController.addData = (req, res) => {
       message: 'Bad request: table not defined.',
     });
   } else {
+    // eslint-disable-next-line consistent-return
     knex.schema.hasTable(req.body.table).then((exists) => {
       if (!exists) { // create table
         return knex.schema.createTable(req.body.table, (t) => {
@@ -36,8 +37,8 @@ sensorController.addData = (req, res) => {
         device_id: req.body.device_id,
         data: req.body.data,
       })
-        .then((result) => {
-          res.status(201).json(result); // todo: result message must be better than this!!
+        .then((resultId) => {
+          res.status(201).json({ success: true, message: `Inserted with Id: ${resultId}` });
         });
     });
   }
