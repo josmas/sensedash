@@ -78,7 +78,7 @@ describe('POST /insert', () => {
         res.should.be.json;
         res.body.should.be.a('object');
         res.body.should.have.property('success');
-        res.body.success.should.equal('true');
+        res.body.success.should.equal(true);
         res.body.should.have.property('message');
         res.body.message.should.equal('Inserted with Id: 1');
         done();
@@ -94,12 +94,12 @@ describe('POST /insert', () => {
         data: validJson,
       })
       .end((err, res) => {
-        res.should.have.status(201);
+        res.should.have.status(400);
         // eslint-disable-next-line no-unused-expressions
         res.should.be.json;
         res.body.should.be.a('object');
         res.body.should.have.property('success');
-        res.body.success.should.equal('false');
+        res.body.success.should.equal(false);
         res.body.should.have.property('message');
         res.body.message.should.equal('Bad request: table not defined.');
         done();
@@ -115,12 +115,12 @@ describe('POST /insert', () => {
         table: 'testtable',
       })
       .end((err, res) => {
-        res.should.have.status(201);
+        res.should.have.status(400);
         // eslint-disable-next-line no-unused-expressions
         res.should.be.json;
         res.body.should.be.a('object');
         res.body.should.have.property('success');
-        res.body.success.should.equal('false');
+        res.body.success.should.equal(false);
         res.body.should.have.property('message');
         res.body.message.should.equal('Bad request: data not defined.');
         done();
@@ -136,12 +136,12 @@ describe('POST /insert', () => {
         data: validJson,
       })
       .end((err, res) => {
-        res.should.have.status(201);
+        res.should.have.status(400);
         // eslint-disable-next-line no-unused-expressions
         res.should.be.json;
         res.body.should.be.a('object');
         res.body.should.have.property('success');
-        res.body.success.should.equal('false');
+        res.body.success.should.equal(false);
         res.body.should.have.property('message');
         res.body.message.should.equal('Bad request: device_id not defined.');
         done();
@@ -157,12 +157,12 @@ describe('POST /insert', () => {
         table: 'testtable',
       })
       .end((err, res) => {
-        res.should.have.status(201);
+        res.should.have.status(400);
         // eslint-disable-next-line no-unused-expressions
         res.should.be.json;
         res.body.should.be.a('object');
         res.body.should.have.property('success');
-        res.body.success.should.equal('false');
+        res.body.success.should.equal(false);
         res.body.should.have.property('message');
         res.body.message.should.equal('Bad request: timestamp not defined.');
         done();
@@ -179,12 +179,12 @@ describe('POST /insert', () => {
         table: '',
       })
       .end((err, res) => {
-        res.should.have.status(201);
+        res.should.have.status(400);
         // eslint-disable-next-line no-unused-expressions
         res.should.be.json;
         res.body.should.be.a('object');
         res.body.should.have.property('success');
-        res.body.success.should.equal('false');
+        res.body.success.should.equal(false);
         res.body.should.have.property('message');
         res.body.message.should.equal('Bad request: table not defined.');
         done();
@@ -201,12 +201,12 @@ describe('POST /insert', () => {
         table: 'testtable',
       })
       .end((err, res) => {
-        res.should.have.status(201);
+        res.should.have.status(400);
         // eslint-disable-next-line no-unused-expressions
         res.should.be.json;
         res.body.should.be.a('object');
         res.body.should.have.property('success');
-        res.body.success.should.equal('false');
+        res.body.success.should.equal(false);
         res.body.should.have.property('message');
         res.body.message.should.equal('Bad request: timestamp not defined.');
         done();
@@ -223,12 +223,12 @@ describe('POST /insert', () => {
         table: 'testtable',
       })
       .end((err, res) => {
-        res.should.have.status(201);
+        res.should.have.status(400);
         // eslint-disable-next-line no-unused-expressions
         res.should.be.json;
         res.body.should.be.a('object');
         res.body.should.have.property('success');
-        res.body.success.should.equal('false');
+        res.body.success.should.equal(false);
         res.body.should.have.property('message');
         res.body.message.should.equal('Bad request: device_id not defined.');
         done();
@@ -245,12 +245,12 @@ describe('POST /insert', () => {
         table: 'testtable',
       })
       .end((err, res) => {
-        res.should.have.status(201);
+        res.should.have.status(400);
         // eslint-disable-next-line no-unused-expressions
         res.should.be.json;
         res.body.should.be.a('object');
         res.body.should.have.property('success');
-        res.body.success.should.equal('false');
+        res.body.success.should.equal(false);
         res.body.should.have.property('message');
         res.body.message.should.equal('Bad request: data not defined.');
         done();
@@ -267,12 +267,12 @@ describe('POST /insert', () => {
         table: 'testtable',
       })
       .end((err, res) => {
-        res.should.have.status(201);
+        res.should.have.status(400);
         // eslint-disable-next-line no-unused-expressions
         res.should.be.json;
         res.body.should.be.a('object');
         res.body.should.have.property('success');
-        res.body.success.should.equal('false');
+        res.body.success.should.equal(false);
         res.body.should.have.property('message');
         res.body.message.should.equal('Bad request: Data field is not valid json data.');
         done();
