@@ -1,9 +1,11 @@
-// process.env.NODE_ENV = 'test';
+process.env.NODE_ENV = 'testing';
 
 /* eslint-env node, mocha */
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const server = require('../app');
+const knex = require('knex')(require('../config'));
+const config = require('../config.json')[process.env.NODE_ENV || 'development'];
 
 // eslint-disable-next-line no-unused-vars
 const should = chai.should();
@@ -32,6 +34,9 @@ const invalidJson = `{"menu": {
 }}`;
 
 chai.use(chaiHttp);
+
+// knex.raw(`DROP DATABASE ${config.dbname}`);
+// knex.raw(`CREATE DATABASE ${config.dbname}`);
 
 describe('check that database is empty before continuing', () => {
   it('should return empty database', () => {

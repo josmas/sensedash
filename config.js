@@ -1,35 +1,12 @@
-const jsonConfig = require('./config.json');
+const jsonConfig = require('./config.json')[process.env.NODE_ENV || 'development'];
 
 module.exports = {
 
-  client: jsonConfig.development.dialect,
+  client: jsonConfig.dialect,
   connection: {
-    user: jsonConfig.development.username,
-    password: jsonConfig.development.password,
-    host: jsonConfig.development.host,
-    database: jsonConfig.development.dbname,
+    user: jsonConfig.username,
+    password: jsonConfig.password,
+    host: jsonConfig.host,
+    database: jsonConfig.dbname,
   },
-  /*
-  development: {
-    client: jsonConfig.development.dialect,
-    connection: {
-      user: jsonConfig.development.username,
-      password: jsonConfig.development.password,
-      host: jsonConfig.development.host,
-      database: jsonConfig.development.dbname,
-    },
-  },
-  */
-
-/*
-  testing: {
-    client: jsonConfig.testing.dialect,
-    connection: {
-      user: jsonConfig.testing.username,
-      password: jsonConfig.testing.password,
-      host: jsonConfig.testing.host,
-      database: jsonConfig.testing.dbname,
-    },
-  },
-*/
 };
