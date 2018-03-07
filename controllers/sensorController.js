@@ -31,6 +31,7 @@ sensorController.addData = (req, res) => {
           t.string('timestamp', 100);
           t.string('device_id', 100);
           t.json('data');
+          console.log('create table');
         });
       }
       knex(req.body.table).insert({
@@ -40,6 +41,7 @@ sensorController.addData = (req, res) => {
       })
         .then((resultId) => {
           res.status(201).json({ success: true, message: `Inserted with Id: ${resultId}` });
+          console.log('insert data');
         });
     });
   }

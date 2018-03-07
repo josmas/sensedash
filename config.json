@@ -1,8 +1,18 @@
 {
-  "host": "localhost",
-  "dbname": "nodejstest",
-  "username": "root",
-  "password": "Pylly6",
-  "port": 3306,
-  "dialect": "mysql"
+  "development": {
+    "host": "localhost",
+    "dbname": "dbdev",
+    "username": "root",
+    "password": "Pylly6",
+    "port": 3306,
+    "dialect": "mysql"
+  },
+  "testing": {
+    "host": "localhost",
+    "dbname": "dbtest",
+    "username": "root",
+    "password": "Pylly6",
+    "port": 3306,
+    "dialect": "mysql"
+  }
 }
