@@ -3,7 +3,7 @@
     "host": "localhost",
     "dbname": "dbdev",
     "username": "root",
-    "password": "Pylly6",
+    "password": "",
     "port": 3306,
     "dialect": "mysql"
   },
@@ -11,7 +11,7 @@
     "host": "localhost",
     "dbname": "dbtest",
     "username": "root",
-    "password": "Pylly6",
+    "password": "",
     "port": 3306,
     "dialect": "mysql"
   }
