@@ -50,18 +50,8 @@ sensorController.addData = (req, res) => {
           t.string('timestamp', 100);
           t.string('device_id', 100);
           t.json('data');
-          console.log('create table');
         });
       }
-      /*knex(req.body.table).insert({
-        timestamp: req.body.timestamp,
-        device_id: req.body.device_id,
-        data: req.body.data,
-      })
-        .then((resultId) => {
-          res.status(201).json({ success: true, message: `Inserted with Id: ${resultId}` });
-          console.log('insert data');
-        });*/
     }).then(() => {
       knex(req.body.table).insert({
         timestamp: req.body.timestamp,
@@ -70,7 +60,6 @@ sensorController.addData = (req, res) => {
       })
         .then((resultId) => {
           res.status(201).json({ success: true, message: `Inserted with Id: ${resultId}` });
-          console.log('insert data');
         });
     });
   }
