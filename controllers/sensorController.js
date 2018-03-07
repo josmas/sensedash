@@ -1,4 +1,5 @@
 const knex = require('knex')(require('../config'));
+const config = require('../config.json');
 
 // The sensorController controller.
 const sensorController = {};
@@ -46,7 +47,7 @@ sensorController.addData = (req, res) => {
 
 sensorController.getConfig = (req, res) => {
   res.header('Content-Type', 'application/json');
-  res.send(JSON.stringify(knex));
+  res.send(JSON.stringify(config));
 };
 
 module.exports = sensorController;
