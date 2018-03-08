@@ -1,6 +1,7 @@
 const knex = require('knex')(require('../knexfile.js')[process.env.NODE_ENV || 'development']);
 const validator = require('validator');
 
+// Validate device id
 function validDeviceId(str) {
   if (validator.isUUID(str)) {
     return true;
@@ -8,6 +9,7 @@ function validDeviceId(str) {
   return false;
 }
 
+// Validate json
 function isJson(str) {
   try {
     JSON.parse(str);
@@ -17,6 +19,7 @@ function isJson(str) {
   return true;
 }
 
+// Validate unix timestamp
 function isUnixTimestamp(str) {
   if (validator.isInt(str)) {
     if (str < 0) {
@@ -27,6 +30,7 @@ function isUnixTimestamp(str) {
   return false;
 }
 
+// validate table name, currently only alphanumeric is accepted with max length of 64
 function isValidTableName(str) {
   if (str.length > 64) {
     return false;
