@@ -1,6 +1,13 @@
 const knex = require('knex')(require('../knexfile.js')[process.env.NODE_ENV || 'development']);
+const validator = require('validator');
 
-// todo: could be relocated
+function validDeviceId(str) {
+  if (validator.isUUID(str)) {
+    return true;
+  }
+  return false;
+}
+
 function isJson(str) {
   try {
     JSON.parse(str);
@@ -10,10 +17,29 @@ function isJson(str) {
   return true;
 }
 
+function isUnixTimestamp(str) {
+  if (validator.isInt(str)) {
+    if (str < 0) {
+      return false;
+    }
+    return true;
+  }
+  return false;
+}
+
+function isValidTableName(str) {
+  if (str.length > 64) {
+    return false;
+  }
+  if (validator.isAlphanumeric(str)) {
+    return true;
+  }
+  return false;
+}
+
 // The sensorController controller.
 const sensorController = {};
 
-// todo: proper error handling!
 sensorController.addData = (req, res) => {
   if (!req.body.timestamp) {
     res.status(400).json({
@@ -39,6 +65,21 @@ sensorController.addData = (req, res) => {
     res.status(400).json({
       success: false,
       message: 'Bad request: data field is not valid json data.',
+    });
+  } else if (!validDeviceId(req.body.device_id)) {
+    res.status(400).json({
+      success: false,
+      message: 'Bad request: device_id field is not valid UUID 128bit.',
+    });
+  } else if (!isUnixTimestamp(req.body.timestamp)) {
+    res.status(400).json({
+      success: false,
+      message: 'Bad request: timestamp field is not valid unix timestamp.',
+    });
+  } else if (!isValidTableName(req.body.table)) {
+    res.status(400).json({
+      success: false,
+      message: 'Bad request: table name is not valid.',
     });
   } else {
     // setTimeout(() => {

@@ -52,7 +52,7 @@ describe('GET /config', () => {
 });
 
 describe('POST /insert', () => {
-  it('should insert new data', (done) => {
+  it('should insert new valid data', (done) => {
     chai.request(server)
       .post('/insert')
       .send({
@@ -293,7 +293,29 @@ describe('POST /insert', () => {
       .post('/insert')
       .send({
         timestamp: '12. March Year: 1997',
-        device_id: 'cf951349--447c-8764-c118fde9ed73',
+        device_id: 'cf951349-19e6-447c-8764-c118fde9ed73',
+        data: validJson,
+        table: 'testtable',
+      })
+      .end((err, res) => {
+        res.should.have.status(400);
+        // eslint-disable-next-line no-unused-expressions
+        res.should.be.json;
+        res.body.should.be.a('object');
+        res.body.should.have.property('success');
+        res.body.success.should.equal(false);
+        res.body.should.have.property('message');
+        res.body.message.should.equal('Bad request: timestamp field is not valid unix timestamp.');
+        done();
+      });
+  });
+
+  it('should not allow invalid timestamp (negative number)', (done) => {
+    chai.request(server)
+      .post('/insert')
+      .send({
+        timestamp: '-500',
+        device_id: 'cf951349-19e6-447c-8764-c118fde9ed73',
         data: validJson,
         table: 'testtable',
       })
@@ -315,7 +337,7 @@ describe('POST /insert', () => {
       .post('/insert')
       .send({
         timestamp: '1520498512',
-        device_id: 'cf951349--447c-8764-c118fde9ed73',
+        device_id: 'cf951349-19e6-447c-8764-c118fde9ed73',
         data: validJson,
         table: 'qwertyuiopasdfghjklzqwertyuiopasdfghjklzqwertyuiopasdfghjklzqwertyuiopasdfghjklzqwertyuiopasdfghjklzqwertyuiopasdfghjklzqwertyuiopasdfghjklzqwertyuiopasdf',
       })
@@ -327,7 +349,27 @@ describe('POST /insert', () => {
         res.body.should.have.property('success');
         res.body.success.should.equal(false);
         res.body.should.have.property('message');
-        res.body.message.should.equal('Bad request: table name is longer than 64 characters.');
+        res.body.message.should.equal('Bad request: table name is not valid.');
+        done();
+      });
+  });
+
+  it('table name length of 64 should pass', (done) => {
+    chai.request(server)
+      .post('/insert')
+      .send({
+        timestamp: '1520498512',
+        device_id: 'cf951349-19e6-447c-8764-c118fde9ed73',
+        data: validJson,
+        table: '1234567890123456789012345678901234567890123456789012345678901234',
+      })
+      .end((err, res) => {
+        res.should.have.status(201);
+        // eslint-disable-next-line no-unused-expressions
+        res.should.be.json;
+        res.body.should.be.a('object');
+        res.body.should.have.property('success');
+        res.body.success.should.equal(true);
         done();
       });
   });
