@@ -1,6 +1,5 @@
-const knex = require('knex')(require('../config'));
+const knex = require('knex')(require('../knexfile.js')[process.env.NODE_ENV || 'development']);
 
-const config = require('../config.json')[process.env.NODE_ENV || 'development'];
 // todo: could be relocated
 function isJson(str) {
   try {
@@ -67,7 +66,7 @@ sensorController.addData = (req, res) => {
 
 sensorController.getConfig = (req, res) => {
   res.header('Content-Type', 'application/json');
-  res.send(JSON.stringify(config));
+  res.send(JSON.stringify(''));
 };
 
 module.exports = sensorController;

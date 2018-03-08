@@ -4,8 +4,7 @@ process.env.NODE_ENV = 'testing';
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const server = require('../app');
-const knex = require('knex')(require('../config'));
-const config = require('../config.json')[process.env.NODE_ENV || 'development'];
+// const knex = require('knex')(require('../knexfile.js')[process.env.NODE_ENV || 'testing']);
 
 // eslint-disable-next-line no-unused-vars
 const should = chai.should();
@@ -38,16 +37,8 @@ chai.use(chaiHttp);
 // knex.raw(`DROP DATABASE ${config.dbname}`);
 // knex.raw(`CREATE DATABASE ${config.dbname}`);
 
-describe('check that database is empty before continuing', () => {
-  it('should return empty database', () => {
-    // eslint-disable-next-line no-undef
-    assert.fail('actual', 'expected', 'Phail');
-  });
-});
-
-
 describe('GET /config', () => {
-  it('should get config /config GET', (done) => {
+  it('should get empty config /config GET', (done) => {
     chai.request(server)
       .get('/config')
       .end((err, res) => {
@@ -55,13 +46,6 @@ describe('GET /config', () => {
         res.should.have.status(200);
         // eslint-disable-next-line no-unused-expressions
         res.should.be.json;
-        res.body.should.be.a('object');
-        res.body.should.have.property('host');
-        res.body.should.have.property('dbname');
-        res.body.should.have.property('username');
-        res.body.should.have.property('password');
-        res.body.should.have.property('port');
-        res.body.should.have.property('dialect');
         done();
       });
   });
@@ -72,8 +56,8 @@ describe('POST /insert', () => {
     chai.request(server)
       .post('/insert')
       .send({
-        timestamp: '2018121',
-        device_id: 'dfa3r23r23',
+        timestamp: '1520498512',
+        device_id: 'cf951349-19e6-447c-8764-c118fde9ed73',
         data: validJson,
         table: 'testtable',
       })
@@ -84,8 +68,6 @@ describe('POST /insert', () => {
         res.body.should.be.a('object');
         res.body.should.have.property('success');
         res.body.success.should.equal(true);
-        res.body.should.have.property('message');
-        res.body.message.should.equal('Inserted with Id: 1');
         done();
       });
   });
@@ -94,8 +76,8 @@ describe('POST /insert', () => {
     chai.request(server)
       .post('/insert')
       .send({
-        timestamp: '2018121',
-        device_id: 'dfa3r23r23',
+        timestamp: '1520498512',
+        device_id: 'cf951349-19e6-447c-8764-c118fde9ed73',
         data: validJson,
       })
       .end((err, res) => {
@@ -115,8 +97,8 @@ describe('POST /insert', () => {
     chai.request(server)
       .post('/insert')
       .send({
-        timestamp: '2018121',
-        device_id: 'dfa3r23r23',
+        timestamp: '1520498512',
+        device_id: 'cf951349-19e6-447c-8764-c118fde9ed73',
         table: 'testtable',
       })
       .end((err, res) => {
@@ -136,7 +118,7 @@ describe('POST /insert', () => {
     chai.request(server)
       .post('/insert')
       .send({
-        timestamp: '2018121',
+        timestamp: '1520498512',
         table: 'testtable',
         data: validJson,
       })
@@ -157,7 +139,7 @@ describe('POST /insert', () => {
     chai.request(server)
       .post('/insert')
       .send({
-        device_id: 'dfa3r23r23',
+        device_id: 'cf951349-19e6-447c-8764-c118fde9ed73',
         data: validJson,
         table: 'testtable',
       })
@@ -178,8 +160,8 @@ describe('POST /insert', () => {
     chai.request(server)
       .post('/insert')
       .send({
-        timestamp: '2018121',
-        device_id: 'dfa3r23r23',
+        timestamp: '1520498512',
+        device_id: 'cf951349-19e6-447c-8764-c118fde9ed73',
         data: validJson,
         table: '',
       })
@@ -201,7 +183,7 @@ describe('POST /insert', () => {
       .post('/insert')
       .send({
         timestamp: '',
-        device_id: 'dfa3r23r23',
+        device_id: 'cf951349-19e6-447c-8764-c118fde9ed73',
         data: validJson,
         table: 'testtable',
       })
@@ -222,7 +204,7 @@ describe('POST /insert', () => {
     chai.request(server)
       .post('/insert')
       .send({
-        timestamp: '2018121',
+        timestamp: '1520498512',
         device_id: '',
         data: validJson,
         table: 'testtable',
@@ -244,8 +226,8 @@ describe('POST /insert', () => {
     chai.request(server)
       .post('/insert')
       .send({
-        timestamp: '2018121',
-        device_id: 'dfa3r23r23',
+        timestamp: '1520498512',
+        device_id: 'cf951349-19e6-447c-8764-c118fde9ed73',
         data: '',
         table: 'testtable',
       })
@@ -266,8 +248,8 @@ describe('POST /insert', () => {
     chai.request(server)
       .post('/insert')
       .send({
-        timestamp: '2018121',
-        device_id: 'dfa3r23r23',
+        timestamp: '1520498512',
+        device_id: 'cf951349-19e6-447c-8764-c118fde9ed73',
         data: invalidJson,
         table: 'testtable',
       })

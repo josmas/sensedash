@@ -61,4 +61,8 @@ typings/
 .next
 
 # config
-config.json
+knexfile.js
+
+# sqlite databases
+test.sqlite3
+dev.sqlite3
