@@ -1,5 +1,7 @@
 # sensedash
 
+** Under development, not ready for production **
+
 ## Get started
 
 Clone repository
