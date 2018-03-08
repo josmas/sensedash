@@ -1,8 +1,42 @@
 # sensedash
 
+## Get started
+
+### Normal way
+
+Clone repository
+```console
+git clone git@github.com:awareframework/sensedash.git
+```
+
+Use sample knexfile and make modifications to match it your environment.
+```console
+$ cp knexfile_sample.js knexfile.js
+```
+
+Install dependencies
+```console
+npm install
+```
+
+Run
+```console
+npm start
+```
+
+### Using docker-compose
+
+You can also use docker-compose to run
 
 ```console
-$ docker-compose up
+docker-compose up
+```
+
+## Running tests
+
+Run tests with
+```console
+$ npm test
 ```
 
 ## Requirements
