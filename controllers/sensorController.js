@@ -38,7 +38,7 @@ sensorController.addData = (req, res) => {
   } else if (!isJson(req.body.data)) {
     res.status(400).json({
       success: false,
-      message: 'Bad request: Data field is not valid json data.',
+      message: 'Bad request: data field is not valid json data.',
     });
   } else {
     // eslint-disable-next-line consistent-return

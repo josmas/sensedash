@@ -261,7 +261,73 @@ describe('POST /insert', () => {
         res.body.should.have.property('success');
         res.body.success.should.equal(false);
         res.body.should.have.property('message');
-        res.body.message.should.equal('Bad request: Data field is not valid json data.');
+        res.body.message.should.equal('Bad request: data field is not valid json data.');
+        done();
+      });
+  });
+
+  it('should not allow invalid device_id', (done) => {
+    chai.request(server)
+      .post('/insert')
+      .send({
+        timestamp: '1520498512',
+        device_id: 'cf951349--447c-8764-c118fde9ed73',
+        data: validJson,
+        table: 'testtable',
+      })
+      .end((err, res) => {
+        res.should.have.status(400);
+        // eslint-disable-next-line no-unused-expressions
+        res.should.be.json;
+        res.body.should.be.a('object');
+        res.body.should.have.property('success');
+        res.body.success.should.equal(false);
+        res.body.should.have.property('message');
+        res.body.message.should.equal('Bad request: device_id field is not valid UUID 128bit.');
+        done();
+      });
+  });
+
+  it('should not allow invalid timestamp', (done) => {
+    chai.request(server)
+      .post('/insert')
+      .send({
+        timestamp: '12. March Year: 1997',
+        device_id: 'cf951349--447c-8764-c118fde9ed73',
+        data: validJson,
+        table: 'testtable',
+      })
+      .end((err, res) => {
+        res.should.have.status(400);
+        // eslint-disable-next-line no-unused-expressions
+        res.should.be.json;
+        res.body.should.be.a('object');
+        res.body.should.have.property('success');
+        res.body.success.should.equal(false);
+        res.body.should.have.property('message');
+        res.body.message.should.equal('Bad request: timestamp field is not valid unix timestamp.');
+        done();
+      });
+  });
+
+  it('should not allow table names longer than 64', (done) => {
+    chai.request(server)
+      .post('/insert')
+      .send({
+        timestamp: '1520498512',
+        device_id: 'cf951349--447c-8764-c118fde9ed73',
+        data: validJson,
+        table: 'qwertyuiopasdfghjklzqwertyuiopasdfghjklzqwertyuiopasdfghjklzqwertyuiopasdfghjklzqwertyuiopasdfghjklzqwertyuiopasdfghjklzqwertyuiopasdfghjklzqwertyuiopasdf',
+      })
+      .end((err, res) => {
+        res.should.have.status(400);
+        // eslint-disable-next-line no-unused-expressions
+        res.should.be.json;
+        res.body.should.be.a('object');
+        res.body.should.have.property('success');
+        res.body.success.should.equal(false);
+        res.body.should.have.property('message');
+        res.body.message.should.equal('Bad request: table name is longer than 64 characters.');
         done();
       });
   });
