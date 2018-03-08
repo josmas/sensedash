@@ -26,7 +26,8 @@ npm start
 
 ### Using docker-compose
 
-You can also use docker-compose to run
+You can also use docker-compose to run.
+In this setting node environment is set to production as default: NODE_ENV=production
 
 ```console
 docker-compose up
@@ -43,6 +44,8 @@ $ npm test
 
 * [Node.js](https://nodejs.org/en/) v6.11.4 +
 * [MySQL](https://www.mysql.com/) v5.7 +
+* [docker-compose](https://docs.docker.com/compose/) v1.16.1 +
+* [docker](https://www.docker.com/) v17.09.0 +
 
 ## Authors
 
