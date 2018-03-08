@@ -41,6 +41,7 @@ sensorController.addData = (req, res) => {
       message: 'Bad request: data field is not valid json data.',
     });
   } else {
+    // setTimeout(() => {
     // eslint-disable-next-line consistent-return
     knex.schema.hasTable(req.body.table).then((exists) => {
       if (!exists) { // create table
@@ -57,16 +58,21 @@ sensorController.addData = (req, res) => {
         device_id: req.body.device_id,
         data: req.body.data,
       })
-        .then((resultId) => {
-          res.status(201).json({ success: true, message: `Inserted with Id: ${resultId}` });
+        .then(() => {
+          res.status(201).json({ success: true });
         });
-    });
+    })
+      .catch((error) => {
+        res.status(201).json({ success: false, message: 'Error: Database connection error.' });
+        console.log(error);
+      });
+    // }, 0);
   }
 };
 
 sensorController.getConfig = (req, res) => {
   res.header('Content-Type', 'application/json');
-  res.send(JSON.stringify(''));
+  res.send(JSON.stringify('')); // todo : should not be empty
 };
 
 module.exports = sensorController;

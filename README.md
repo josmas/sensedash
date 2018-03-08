@@ -2,8 +2,6 @@
 
 ## Get started
 
-### Normal way
-
 Clone repository
 ```console
 git clone git@github.com:awareframework/sensedash.git
@@ -13,6 +11,8 @@ Use sample knexfile and make modifications to match it your environment.
 ```console
 $ cp knexfile_sample.js knexfile.js
 ```
+
+### Normal way
 
 Install dependencies
 ```console
