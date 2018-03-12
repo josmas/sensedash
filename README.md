@@ -14,16 +14,16 @@ Use sample knexfile and make modifications to match it your environment.
 $ cp knexfile_sample.js knexfile.js
 ```
 
-### Normal way
+### Docker
 
-Install dependencies
+Build:
 ```console
-npm install
+docker build -t node-web-app .
 ```
 
-Run
+Run:
 ```console
-npm start
+docker run -it --rm -p 3000:3000 -e DB_HOST=mysql -e DB_USER=dbuser -e DB_PASSWORD=password -e NODE_ENV=production --name my-nodejsapp node-web-app
 ```
 
 ### Using docker-compose
