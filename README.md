@@ -9,11 +9,6 @@ Clone repository
 git clone git@github.com:awareframework/sensedash.git
 ```
 
-Use sample knexfile and make modifications to match it your environment.
-```console
-$ cp knexfile_sample.js knexfile.js
-```
-
 ### Docker
 
 Build:
