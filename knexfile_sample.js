@@ -1,4 +1,5 @@
 // Update with your config settings.
+const config = require('./config/config');
 
 module.exports = {
 
@@ -19,10 +20,10 @@ module.exports = {
   production: {
     client: 'mysql',
     connection: {
-      host: 'mysql',
-      database: 'defaultdb',
-      user: 'username',
-      password: 'password',
+      host: config.mysql_ip,
+      database: config.mysql_database,
+      user: config.mysql_user,
+      password: config.mysql_pass,
     },
     pool: {
       min: 2,

@@ -23,7 +23,7 @@ docker build -t node-web-app .
 
 Run:
 ```console
-docker run -it --rm -p 3000:3000 -e DB_HOST=mysql -e DB_USER=dbuser -e DB_PASSWORD=password -e NODE_ENV=production --name my-nodejsapp node-web-app
+docker run -it --rm -p 3000:3000 --name my-nodejsapp node-web-app
 ```
 
 ### Using docker-compose
