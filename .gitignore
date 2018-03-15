@@ -61,7 +61,6 @@ typings/
 .next
 
 # config
-knexfile.js
 config/*
 
 # sqlite databases
