@@ -62,6 +62,7 @@ typings/
 
 # config
 knexfile.js
+config/*
 
 # sqlite databases
 test.sqlite3

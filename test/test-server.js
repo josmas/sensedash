@@ -34,9 +34,6 @@ const invalidJson = `{"menu": {
 
 chai.use(chaiHttp);
 
-// knex.raw(`DROP DATABASE ${config.dbname}`);
-// knex.raw(`CREATE DATABASE ${config.dbname}`);
-
 describe('GET /config', () => {
   it('should get empty config /config GET', (done) => {
     chai.request(server)
@@ -46,6 +43,14 @@ describe('GET /config', () => {
         res.should.have.status(200);
         // eslint-disable-next-line no-unused-expressions
         res.should.be.json;
+        res.body.should.be.a('object');
+        res.body.should.have.property('study_id');
+        res.body.should.not.have.property('api_key');
+        res.body.should.not.have.property('mysql_ip');
+        res.body.should.not.have.property('mysql_port');
+        res.body.should.not.have.property('mysql_user');
+        res.body.should.not.have.property('mysql_pass');
+        res.body.should.not.have.property('mysql_database');
         done();
       });
   });

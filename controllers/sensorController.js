@@ -1,5 +1,6 @@
 const knex = require('knex')(require('../knexfile.js')[process.env.NODE_ENV || 'development']);
 const validator = require('validator');
+const config = require('../config/config');
 
 // Validate device id
 function validDeviceId(str) {
@@ -117,7 +118,8 @@ sensorController.addData = (req, res) => {
 
 sensorController.getConfig = (req, res) => {
   res.header('Content-Type', 'application/json');
-  res.send(JSON.stringify('')); // todo : should not be empty
+  console.log('Sending config');
+  res.send(JSON.stringify(config.config)); // todo : should not be empty
 };
 
 module.exports = sensorController;
