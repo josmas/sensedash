@@ -119,7 +119,7 @@ sensorController.addData = (req, res) => {
 sensorController.getConfig = (req, res) => {
   res.header('Content-Type', 'application/json');
   console.log('Sending config');
-  res.send(JSON.stringify(config.config)); // todo : should not be empty
+  res.send(JSON.stringify(config.config));
 };
 
 module.exports = sensorController;
