@@ -104,8 +104,9 @@ sensorController.addData = (req, res) => {
         device_id: req.body.device_id,
         data: req.body.data,
       })
-        .then(() => {
+        .then((data) => {
           res.status(201).json({ success: true });
+          console.log(`Inserted with id: ${data}`);
         });
     })
       .catch((error) => {
