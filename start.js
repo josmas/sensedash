@@ -11,6 +11,14 @@ if (cluster.isMaster) {
   for (let i = 0; i < cpuCount; i += 1) {
     cluster.fork();
   }
+
+  // handle unwanted worker exits
+  cluster.on('exit', (worker, code) => {
+    if (code !== 0) {
+      console.log('Worker crashed! Spawning a replacement.');
+      cluster.fork();
+    }
+  });
 } else {
   app.set('port', process.env.PORT || 3000);
   const server = app.listen(app.get('port'), () => {
