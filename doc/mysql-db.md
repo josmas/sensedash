@@ -32,6 +32,8 @@ mysql_secure_installation
 
 Configure & install
 
+// todo: write detailed docs
+
 install cluster:
 https://dev.mysql.com/doc/refman/5.7/en/mysql-cluster-install-linux.html
 
@@ -40,9 +42,6 @@ https://dev.mysql.com/doc/refman/5.7/en/mysql-cluster-install-configuration.html
 
 start cluster:
 https://dev.mysql.com/doc/refman/5.7/en/mysql-cluster-install-first-start.html
-
-
-* https://dev.mysql.com/doc/refman/5.7/en/mysql-cluster-installation.html
 
 # Create user and database
 
