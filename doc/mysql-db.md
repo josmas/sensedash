@@ -22,9 +22,25 @@ mysql_secure_installation
 
 * https://dev.mysql.com/downloads/installer/
 
+# AWS configure security groups
+
+// todo: write better
+* Open mysql port
+* open ports for internal communication
+
 # MySQL cluster setup
 
-todo : mysql cluster installation tutorial
+Configure & install
+
+install cluster:
+https://dev.mysql.com/doc/refman/5.7/en/mysql-cluster-install-linux.html
+
+configure cluster:
+https://dev.mysql.com/doc/refman/5.7/en/mysql-cluster-install-configuration.html
+
+start cluster:
+https://dev.mysql.com/doc/refman/5.7/en/mysql-cluster-install-first-start.html
+
 
 * https://dev.mysql.com/doc/refman/5.7/en/mysql-cluster-installation.html
 
