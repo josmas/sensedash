@@ -9,7 +9,7 @@ In MySQL you need to define database config in config/config.js
 "mysql_pass": "passwordhere",
 "mysql_database": "databasename",
 ```
-# MySQL single db setup
+# MySQL setup
 
 * https://dev.mysql.com/downloads/installer/
 
