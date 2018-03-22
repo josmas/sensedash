@@ -4,21 +4,46 @@
 
 ## Get started
 
-Clone repository
+Clone repository and change directory
 ```console
 git clone git@github.com:awareframework/sensedash.git
+cd sensedash
 ```
 
-### Docker
-
-Build:
+Install Docker:
 ```console
-docker build -t node-web-app .
+sudo apt install docker.io
 ```
 
-Run:
+Build dockerimage:
 ```console
-docker run -it --rm -p 3000:3000 --name my-nodejsapp node-web-app
+docker build -t nodejs-server .
+```
+
+Create config file
+```console
+nano config/config.json
+```
+
+Example (replace with correct variables):
+```
+{
+  "study_id": "id",
+  "api_key": "apikey",
+  "mysql_ip": "host_ip",
+  "mysql_port": "host_port",
+  "mysql_user": "mysql_username",
+  "mysql_pass": "mysql_password",
+  "mysql_database": "mysql_dbname",
+  "config": {
+    "study_id": "xxx"
+  }
+}
+```
+
+Run and opening port 3000 from container:
+```console
+docker run -it --rm -p 3000:3000 --name server nodejs-server
 ```
 
 ### Using docker-compose
@@ -30,19 +55,14 @@ In this setting node environment is set to production as default: NODE_ENV=produ
 docker-compose up
 ```
 
-## Running tests
-
-Run tests with
-```console
-$ npm test
-```
-
 ## Requirements
 
 * [Node.js](https://nodejs.org/en/) v6.11.4 +
 * [MySQL](https://www.mysql.com/) v5.7 +
 * [docker-compose](https://docs.docker.com/compose/) v1.16.1 +
 * [docker](https://www.docker.com/) v17.09.0 +
+
+[MySQL setup](doc/mysql-db.md)
 
 ## Authors
 
