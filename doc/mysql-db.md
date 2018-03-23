@@ -1,14 +1,11 @@
 # MySQL setup
 
-In MySQL you need to define database config in config/config.js
+## Introduction
+This document covers setting up MySQL cluster to AWS EC2 service. In this example we use  Ubuntu Server 16.04 LTS (HVM), SSD Volume Type - ami-1b791862 as machine image. Instance type used is t2.micro which has 1 GiB memory and 1 vCPU. Four different instances are created and they are allowed to communicate with each other in same AWS security group. For SQL node (api endpoint) instance mysql port 3306 needs to be opened in order to allow access outside AWS EC2 service. For this purpose new security needs to be created for this purpose and SQL needs to be assigned to that security group.
 
-```console
-"mysql_ip": "hostname",
-"mysql_port": "portnumber",
-"mysql_user": "username",
-"mysql_pass": "password",
-"mysql_database": "mydb",
-```
+
+
+
 
 # MySQL setup
 
