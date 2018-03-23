@@ -41,7 +41,7 @@ sudo apt-get update
 sudo apt-get install mysql-cluster-community-server
 ```
 
-Management nodes:
+Management node:
 
 ```console
 sudo apt-get update
