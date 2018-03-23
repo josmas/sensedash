@@ -12,30 +12,19 @@ In data nodes ndbd process handles data in tables using NDB Cluster storage engi
 
 in Sql endpoint node Mysql daemon (mysqld) is running. Purpose of mysqld is to manage access to data directory containing tables and databases. (https://dev.mysql.com/doc/refman/5.7/en/mysqld.html)
 
-
-# MySQL setup
-
-Ubuntu:
-
-```console
-sudo apt-get update
-sudo apt-get install mysql-server
-mysql_secure_installation
-```
-
-* https://dev.mysql.com/downloads/installer/
-
 # AWS configure security groups
 
-// todo: write better
-* Open mysql port
-* open ports for internal communication
+In AWS security groups for instances need to be configured properly. In current setting all traffic is allowed within security group so nodes can communicate with each other. Ssh connections (port 22) should be opened so cluster nodes can be configured remotely.
+
+For SQL node port 3306 need to be opened in order to allow incoming connection to MySQL daemon.
 
 # MySQL cluster setup
 
-## install
+In this setup four nodes need to be configured. There are different options for installing MySQL NDB: installing from sources, installing from binaries, installing from apt sources etc. In current example installation from apt source is used.
 
-for all nodes:
+## Install
+
+Following commands are executed in all four nodes.
 
 ```console
 sudo apt update
@@ -43,7 +32,7 @@ sudo apt-get install python-paramiko libclass-methodmaker-perl
 wget https://dev.mysql.com/get/mysql-apt-config_0.8.9-1_all.deb
 sudo dpkg -i mysql-apt-config_0.8.9-1_all.deb
 ```
-choose “mysql-cluster-x.y
+Choose “mysql-cluster-7.5
 
 sql nodes:
 
