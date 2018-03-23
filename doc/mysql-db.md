@@ -34,21 +34,21 @@ sudo dpkg -i mysql-apt-config_0.8.9-1_all.deb
 ```
 Choose “mysql-cluster-7.5
 
-sql nodes:
+SQL node:
 
 ```console
 sudo apt-get update
 sudo apt-get install mysql-cluster-community-server
 ```
 
-mgm nodes:
+Management nodes:
 
 ```console
 sudo apt-get update
 sudo apt-get install mysql-cluster-community-management-server
 ```
 
-data nodes:
+Data nodes:
 
 ```console
 sudo apt-get update
