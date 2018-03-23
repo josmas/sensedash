@@ -3,8 +3,14 @@
 ## Introduction
 This document covers setting up MySQL cluster to AWS EC2 service. In this example we use  Ubuntu Server 16.04 LTS (HVM), SSD Volume Type - ami-1b791862 as machine image. Instance type used is t2.micro which has 1 GiB memory and 1 vCPU. Four different instances are created and they are allowed to communicate with each other in same AWS security group. For SQL node (api endpoint) instance mysql port 3306 needs to be opened in order to allow access outside AWS EC2 service. For this purpose new security needs to be created for this purpose and SQL needs to be assigned to that security group.
 
+## Nodes
 
+There are three different types of nodes in cluster. Our example cluster consists of two data nodes, one sql node and management node. 
 
+In data nodes ndbd process handles data in tables using NDB Cluster storage engine. ndbd process takes handles tasks related to node recovery, distributed transaction handling etc. On startup two processes are initiated by ndbd: first one is named "angel process" and its purpose is to discover when execution process is finished and then restart ndbd process if configured to do so.
+(https://dev.mysql.com/doc/refman/5.7/en/mysql-cluster-programs-ndbd.html)
+
+in Sql endpoint node Mysql daemon (mysqld) is running. Purpose of mysqld is to manage access to data directory containing tables and databases. (https://dev.mysql.com/doc/refman/5.7/en/mysqld.html)
 
 
 # MySQL setup
