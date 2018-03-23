@@ -72,8 +72,7 @@ ndbcluster                      # run NDB storage engine
 ndb-connectstring=198.51.100.10  # location of management server
 ```
 
-management node
-
+Do this in management node:
 
 ```console
 sudo mkdir /var/lib/mysql-cluster
@@ -81,7 +80,7 @@ cd /var/lib/mysql-cluster
 sudo nano config.ini
 ```
 
-modify to look like this:
+Modify to look like this:
 ```
 [ndbd default]
 # Options affecting ndbd processes on all data nodes:
@@ -127,29 +126,29 @@ HostName=198.51.100.20          # Hostname or IP address
                                 # purposes such as running ndb_restore)
 ```
 
-reference:
+Reference:
 https://dev.mysql.com/doc/refman/5.7/en/mysql-cluster-installation.html
 
-## cluster startup
+## Cluster startup
 
-management node:
+Management node:
 
 ```console
 sudo ndb_mgmd -f /var/lib/mysql-cluster/config.ini
 ```
 
-data nodes:
+Data nodes:
 
 ```console
 sudo mkdir -p /usr/local/mysql/data
 sudo ndbd
 ```
 
-sql node:
+SQL node:
 
 use startup script provided by package
 
-## verify
+## Verify
 
 management:
 ```console
