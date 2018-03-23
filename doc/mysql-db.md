@@ -22,7 +22,7 @@ For SQL node port 3306 need to be opened in order to allow incoming connection t
 
 In this setup four nodes need to be configured. There are different options for installing MySQL NDB: installing from sources, installing from binaries, installing from apt sources etc. In current example installation from apt source is used.
 
-## Install
+## Installation
 
 Following commands are executed in all four nodes.
 
@@ -55,13 +55,13 @@ sudo apt-get update
 sudo apt-get install mysql-cluster-community-data-node
 ```
 
-## configure
+## Configuration
 
-for each data node and sql node:
+Do this for each data node and SQL node:
 ```console
 sudo nano /etc/my.cnf
 ```
-modify to look like this:
+Modify to look like this:
 ```
 [mysqld]
 # Options for mysqld process:
