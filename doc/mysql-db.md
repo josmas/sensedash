@@ -162,7 +162,7 @@ sudo ndbd
 SQL node:
 
 ```console
-sudo service mysql restart
+sudo service mysql start
 ```
 
 ## Verify
