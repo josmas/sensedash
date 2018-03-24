@@ -76,7 +76,7 @@ Do this for SQL node:
 ```console
 sudo nano /etc/mysql/my.cnf
 ```
-Modify to look like this:
+Add this to existing file:
 ```
 [mysqld]
 # Options for mysqld process:
@@ -163,6 +163,7 @@ SQL node:
 
 ```console
 sudo service mysql start
+sudo service mysql restart
 ```
 
 ## Verify
