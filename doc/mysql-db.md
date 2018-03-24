@@ -57,9 +57,24 @@ sudo apt-get install mysql-cluster-community-data-node
 
 ## Configuration
 
-Do this for each data node and SQL node:
+Do this for each data node:
 ```console
 sudo nano /etc/my.cnf
+```
+Modify to look like this:
+```
+[mysqld]
+# Options for mysqld process:
+ndbcluster                      # run NDB storage engine
+
+[mysql_cluster]
+# Options for NDB Cluster processes:
+ndb-connectstring=198.51.100.10  # location of management server
+```
+
+Do this for SQL node:
+```console
+sudo nano /etc/mysql/my.cnf
 ```
 Modify to look like this:
 ```
@@ -146,11 +161,14 @@ sudo ndbd
 
 SQL node:
 
-use startup script provided by package
+```console
+sudo service mysql restart
+```
 
 ## Verify
 
-management:
+In management node:
+
 ```console
 sudo apt install mysql-client
 sudo ndb_mgm
