@@ -6,8 +6,7 @@
 
 ### Database
 
-Before you can start you need to setup a database. MySQL database is used as default.
-
+Before you can start you need to setup a database. MySQL NDB database setup documentation is provided as an example:
 * [MySQL setup](doc/mysql-db.md)
 
 ### Installation
@@ -23,12 +22,7 @@ git clone git@github.com:awareframework/sensedash.git
 cd sensedash
 ```
 
-Build dockerimage:
-```console
-docker build -t nodejs-server .
-```
 
-### Configuration
 
 Create config file
 ```console
@@ -51,6 +45,11 @@ Example (replace with correct variables):
 }
 ```
 
+Build dockerimage:
+```console
+docker build -t nodejs-server .
+```
+
 ### Running
 
 Run and opening port 3000 from container:
@@ -66,6 +65,10 @@ In this setting node environment is set to production as default: NODE_ENV=produ
 ```console
 docker-compose up
 ```
+
+### Run with Docker swarm
+
+* [Docker swarm documentation](doc/docker-swarm.md)
 
 ### Debug 
 
