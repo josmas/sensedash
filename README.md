@@ -12,15 +12,15 @@ Before you can start you need to setup a database. MySQL database is used as def
 
 ### Installation
 
+Install Docker:
+```console
+sudo apt install docker.io
+```
+
 Clone repository and change directory
 ```console
 git clone git@github.com:awareframework/sensedash.git
 cd sensedash
-```
-
-Install Docker:
-```console
-sudo apt install docker.io
 ```
 
 Build dockerimage:
