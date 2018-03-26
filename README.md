@@ -58,7 +58,7 @@ Run and opening port 3000 from container:
 docker run -it --rm -p 3000:3000 --name server nodejs-server
 ```
 
-### ### Installation using docker-compose
+### Installation using docker-compose
 
 You can also use docker-compose to run.
 In this setting node environment is set to production as default: NODE_ENV=production
