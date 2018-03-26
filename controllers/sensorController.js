@@ -1,6 +1,7 @@
 const knex = require('knex')(require('../knexfile.js')[process.env.NODE_ENV || 'development']);
 const validator = require('validator');
 const config = require('../config/config');
+const debug = require('debug')('app');
 
 // Validate device id
 function validDeviceId(str) {
@@ -106,12 +107,12 @@ sensorController.addData = (req, res) => {
       })
         .then((data) => {
           res.status(201).json({ success: true });
-          console.log(`Inserted with id: ${data}`);
+          debug(`Inserted with id: ${data}`);
         });
     })
       .catch((error) => {
         res.status(201).json({ success: false, message: 'Error: Database connection error.' });
-        console.log(error);
+        debug(error);
       });
     // }, 0);
   }
@@ -119,7 +120,7 @@ sensorController.addData = (req, res) => {
 
 sensorController.getConfig = (req, res) => {
   res.header('Content-Type', 'application/json');
-  console.log('Sending config');
+  debug('Sending config');
   res.send(JSON.stringify(config.config));
 };
 

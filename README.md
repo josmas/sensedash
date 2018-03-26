@@ -67,6 +67,13 @@ In this setting node environment is set to production as default: NODE_ENV=produ
 docker-compose up
 ```
 
+### Debug 
+
+```console
+DEBUG=app npm start
+```
+
+
 ## Requirements
 
 * [Node.js](https://nodejs.org/en/) v6.11.4 +
