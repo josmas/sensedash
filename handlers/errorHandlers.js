@@ -8,18 +8,10 @@ exports.notFound = (req, res) => {
   res.status(201).json({ status: 404, message: 'Not found' });
 };
 
-exports.developmentErrors = (err, req, res) => {
+exports.showErrors = (err, req, res) => {
   res.status(err.status || 500);
   res.json({
     message: err.message,
     error: err,
-  });
-};
-
-exports.productionErrors = (err, req, res) => {
-  res.status(err.status || 500);
-  res.json({
-    message: err.message,
-    error: {},
   });
 };

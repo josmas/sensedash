@@ -6,21 +6,15 @@ const routes = require('./routes/index');
 
 const app = express();
 
-// app.use(logger('dev'));
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use('/', routes);
 
+// Not found error handler
 app.use(errorHandlers.notFound);
 
-if (app.get('env') === 'development') {
-  // Development Error Handler
-  app.use(errorHandlers.developmentErrors);
-}
-
-// production error handler
-app.use(errorHandlers.productionErrors);
+// Error handler
+app.use(errorHandlers.showErrors);
 
 module.exports = app;
