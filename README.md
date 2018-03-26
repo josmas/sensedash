@@ -4,6 +4,14 @@
 
 ## Get started
 
+### Database
+
+Before you can start you need to setup a database. MySQL database is used as default.
+
+* [MySQL setup](doc/mysql-db.md)
+
+### Installation
+
 Clone repository and change directory
 ```console
 git clone git@github.com:awareframework/sensedash.git
@@ -19,6 +27,8 @@ Build dockerimage:
 ```console
 docker build -t nodejs-server .
 ```
+
+### Configuration
 
 Create config file
 ```console
@@ -41,12 +51,14 @@ Example (replace with correct variables):
 }
 ```
 
+### Running
+
 Run and opening port 3000 from container:
 ```console
 docker run -it --rm -p 3000:3000 --name server nodejs-server
 ```
 
-### Using docker-compose
+### ### Installation using docker-compose
 
 You can also use docker-compose to run.
 In this setting node environment is set to production as default: NODE_ENV=production
@@ -55,6 +67,7 @@ In this setting node environment is set to production as default: NODE_ENV=produ
 docker-compose up
 ```
 
+
 ## Requirements
 
 * [Node.js](https://nodejs.org/en/) v6.11.4 +
@@ -62,7 +75,7 @@ docker-compose up
 * [docker-compose](https://docs.docker.com/compose/) v1.16.1 +
 * [docker](https://www.docker.com/) v17.09.0 +
 
-[MySQL setup](doc/mysql-db.md)
+
 
 ## Authors
 
