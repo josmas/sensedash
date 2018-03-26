@@ -4,6 +4,13 @@ With Docker swarm mode it is possible to manage containers across multiple host 
 
 Create three ndoes in AWS EC2.
 
+You should already have built Docker image of sensedash nodejs component. You should push image to Docker cloud. Later you can fetch image from AWS server. Execute following in your local host and replace with corrent variables.
+```console
+docker tag image username/sensedash-server:tag
+docker images
+docker push username/sensedash-server:tag
+```
+
 Run for all nodes:
 ```console
 sudo apt update
