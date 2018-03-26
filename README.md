@@ -67,15 +67,13 @@ In this setting node environment is set to production as default: NODE_ENV=produ
 docker-compose up
 ```
 
-
 ## Requirements
 
 * [Node.js](https://nodejs.org/en/) v6.11.4 +
 * [MySQL](https://www.mysql.com/) v5.7 +
 * [docker-compose](https://docs.docker.com/compose/) v1.16.1 +
 * [docker](https://www.docker.com/) v17.09.0 +
-
-
+* [Ubuntu Server](https://www.ubuntu.com/)  16.04 LTS
 
 ## Authors
 
