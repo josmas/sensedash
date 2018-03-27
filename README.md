@@ -78,7 +78,6 @@ docker-compose up
 DEBUG=app npm start
 ```
 
-
 ## Requirements
 
 * [Node.js](https://nodejs.org/en/) v6.11.4 +

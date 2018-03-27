@@ -28,30 +28,28 @@ Following commands are executed in all four nodes.
 
 ```console
 sudo apt update
-sudo apt-get install python-paramiko libclass-methodmaker-perl
+sudo apt-get install -y python-paramiko libclass-methodmaker-perl
 wget https://dev.mysql.com/get/mysql-apt-config_0.8.9-1_all.deb
 sudo dpkg -i mysql-apt-config_0.8.9-1_all.deb
+sudo apt-get update
 ```
 Choose “mysql-cluster-7.5
 
 SQL node:
 
 ```console
-sudo apt-get update
 sudo apt-get install mysql-cluster-community-server
 ```
 
 Management node:
 
 ```console
-sudo apt-get update
 sudo apt-get install mysql-cluster-community-management-server
 ```
 
 Data nodes:
 
 ```console
-sudo apt-get update
 sudo apt-get install mysql-cluster-community-data-node
 ```
 
@@ -86,6 +84,19 @@ ndbcluster                      # run NDB storage engine
 # Options for NDB Cluster processes:
 ndb-connectstring=198.51.100.10  # location of management server
 ```
+
+```console
+sudo nano /etc/mysql/mysql.conf.d/mysqld.cnf
+```
+
+Change following line:
+
+bind-address = 127.0.0.1
+
+to:
+
+bind-address = 0.0.0.0
+
 
 Do this in management node:
 
@@ -171,7 +182,7 @@ sudo service mysql restart
 In management node:
 
 ```console
-sudo apt install mysql-client
+sudo apt install -y mysql-client
 sudo ndb_mgm -e show
 ```
 
@@ -196,15 +207,15 @@ id=4	@172.31.36.196  (mysql-5.7.21 ndb-7.5.9)
 
 Type following in sql node.
 ```console
-mysql
+mysql -h localhost -u root -p
 ```
 
 Then in MySQL client type following and replace username, password and mydb to match your preferences:
 ```console
-CREATE DATABASE `mydb`;
-CREATE USER 'username' IDENTIFIED BY 'password';
-GRANT USAGE ON *.* TO 'username'@'%' IDENTIFIED BY 'password';
-GRANT ALL privileges ON `mydb`.* TO 'username'@%;
+CREATE DATABASE mydb;
+CREATE USER 'username'@'localhost' IDENTIFIED BY 'password';
+GRANT ALL ON mydb.* TO 'username'@'localhost';
+CREATE USER 'username'@'%' IDENTIFIED BY 'password';
+GRANT ALL ON mydb.* TO 'username'@'%';
 FLUSH PRIVILEGES;
-SHOW GRANTS FOR 'myuser'@localhost;
 ```
