@@ -2,6 +2,8 @@
 
 ** Under development, not ready for production **
 
+![Architecture](images/architecture.png "Architecture")
+
 ## Get started
 
 ### Database
