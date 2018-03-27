@@ -172,13 +172,29 @@ In management node:
 
 ```console
 sudo apt install mysql-client
-sudo ndb_mgm
+sudo ndb_mgm -e show
 ```
-type show
+
+Output should look like this:
+
+```console
+Connected to Management Server at: localhost:1186
+Cluster Configuration
+---------------------
+[ndbd(NDB)]	2 node(s)
+id=2	@172.31.43.123  (mysql-5.7.21 ndb-7.5.9, Nodegroup: 0, *)
+id=3	@172.31.33.117  (mysql-5.7.21 ndb-7.5.9, Nodegroup: 0)
+
+[ndb_mgmd(MGM)]	1 node(s)
+id=1	@172.31.42.160  (mysql-5.7.21 ndb-7.5.9)
+
+[mysqld(API)]	1 node(s)
+id=4	@172.31.36.196  (mysql-5.7.21 ndb-7.5.9)
+```
 
 # Create user and database
 
-In Linux terminal type:
+Type following in sql node.
 ```console
 mysql
 ```
