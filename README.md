@@ -87,7 +87,7 @@ DEBUG=app npm start
 
 ## Database support
 
-In current project knex is used for database communication. Knex support several different databases but this project officially supports only MySQL.
+In current project knex is used for database communication. Knex support several different databases but this project officially supports only MySQL v5.7 +.
 
 ## Requirements
 
