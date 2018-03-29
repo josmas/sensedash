@@ -85,7 +85,7 @@ Docker swarm provides clustering functionality for Docker containers. With docke
 DEBUG=app npm start
 ```
 
-## Other
+## Database support
 
 In current project knex is used for database communication. Knex support several different databases but this project officially supports only MySQL.
 
