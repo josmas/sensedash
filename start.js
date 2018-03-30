@@ -25,4 +25,5 @@ if (cluster.isMaster) {
   const server = app.listen(app.get('port'), () => {
     debug(`${process.pid}: Running → PORT ${server.address().port}`);
   });
+  https.createServer(options, app).listen(8443);
 }

@@ -66,3 +66,6 @@ config/*
 # sqlite databases
 test.sqlite3
 dev.sqlite3
+
+# ssl certificates
+sslcert/*
