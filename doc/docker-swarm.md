@@ -86,7 +86,7 @@ elcolio/etcd:latest \
 ```
 
 ```console
-sudo docker service create --replicas 3 --network nodejs -p 3000:3000 --with-registry-auth username/repository:tag
+sudo docker service create --replicas 3 --mount src=cert,dst=/certificate --network nodejs -p 3000:3000 --with-registry-auth username/repository:tag
 ```
 
 Yuo should now be allow to access running container from http://address:3000/

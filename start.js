@@ -29,9 +29,6 @@ if (cluster.isMaster) {
     }
   });
 } else {
-  app.set('port', process.env.PORT || 3000);
-  const server = app.listen(app.get('port'), () => {
-    debug(`${process.pid}: Running → PORT ${server.address().port}`);
-  });
   https.createServer(options, app).listen(8443);
+  debug('Server listening on port 8443');
 }
