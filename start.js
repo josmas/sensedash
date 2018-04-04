@@ -8,8 +8,8 @@ const cpuCount = require('os').cpus().length; // Count the CPUs
 
 // setup certificates
 const options = {
-  cert: fs.readFileSync('/certificate/fullchain.pem'),
-  key: fs.readFileSync('/certificate/privkey.pem'),
+  cert: fs.readFileSync('/run/secrets/fullchain.pem'),
+  key: fs.readFileSync('/run/secrets/privkey.pem'),
 };
 
 // Log environment to console

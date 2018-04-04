@@ -89,11 +89,25 @@ elcolio/etcd:latest \
 -discovery=DISCOVERY-ADDRESS-HERE
 ```
 
+Create docker secrets
 ```console
-sudo docker service create --replicas 3 --mount src=cert,dst=/certificate --network nodejs -p 3000:3000 --with-registry-auth username/repository:tag
+sudo docker secret create fullchain.pem fullchain.pem
+sudo docker secret create privkey.pem privkey.pem
 ```
 
-Yuo should now be allow to access running container from http://address:3000/
+Create docker service
+```console
+sudo docker service create \ 
+--replicas 3 \
+--secret fullchain.pem \
+--secret privkey.pem \
+--network nodejs \
+-p 8443:443 \
+--with-registry-auth \
+username/repository:tag
+```
+
+Yuo should now be allow to access running container from https://address/
 
 Reference:
 https://severalnines.com/blog/mysql-docker-introduction-docker-swarm-mode-and-multi-host-networking
