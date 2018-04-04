@@ -1,5 +1,6 @@
 // Update with your config settings.
 const config = require('./config/config');
+const fs = require('fs');
 
 module.exports = {
 
@@ -24,6 +25,9 @@ module.exports = {
       database: config.mysql_database,
       user: config.mysql_user,
       password: config.mysql_pass,
+      ssl: {
+        ca: fs.readFileSync(`${__dirname}/mysql-ca.crt`),
+      },
     },
     pool: {
       min: 2,
