@@ -216,6 +216,6 @@ CREATE DATABASE mydb;
 CREATE USER 'username'@'localhost' IDENTIFIED BY 'password';
 GRANT ALL ON mydb.* TO 'username'@'localhost';
 CREATE USER 'username'@'%' IDENTIFIED BY 'password';
-GRANT ALL ON mydb.* TO 'username'@'%';
+GRANT ALL ON mydb.* TO 'username'@'%' REQUIRE SSL;
 FLUSH PRIVILEGES;
 ```
