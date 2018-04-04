@@ -2,31 +2,40 @@
 
 With Docker swarm mode it is possible to manage containers across multiple host machines. There are two types of nodes: manager for performing cluster management and orchestration related tasks and worker for performing tasks given by manager. By default manager nodes are also workers.
 
-Create three ndoes in AWS EC2.
+In this example three t2.micro nodes are created in AWS EC2. It is necessary to allow nodes to communicate with each others within same security group.
 
 You should already have built Docker image of sensedash nodejs component. You should push image to Docker cloud. Later you can fetch image from AWS server. Execute following in your local host and replace with corrent variables.
 ```console
 docker tag image username/sensedash-server:tag
-docker images
 docker push username/sensedash-server:tag
 ```
 
 Run for all nodes:
+
 ```console
-sudo apt update
-sudo apt install docker.io
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+sudo apt-get update
+apt-cache policy docker-ce
+sudo apt-get install -y docker-ce
 ```
 
-Run in node1
+Run in node1:
+Get ip address
+```console
+ifconfig
+```
+
+Execute following with IP-ADDRESS replaced with ip address of eth0 from previous command
 ```console
 sudo docker swarm init --advertise-addr IP-ADDRESS
 sudo docker swarm join-token manager
 ```
 
-Run in node2 and node3
+Run in node2 and node3 and replace token with TOKEN given by previous command. You can also copy paste command given to you by previous command in node1.
 ```console
 sudo docker swarm join \
-    --token SWMTKN-1-16kit6dksvrqilgptjg5pvu0tvo5qfs8uczjq458lf9mul41hc-7fd1an5iucy4poa4g1bnav0pt \
+    --token TOKEN \
     IP-ADDRESS
 ```
 
@@ -70,18 +79,18 @@ https://discovery.etcd.io/78573ea75bd18d13ddabcf4bc300bbc0
 [node1]$ sudo docker service create \
 --name etcd \
 --replicas 1 \
---network mynet \
+--network nodejs \
 -p 2379:2379 \
 -p 2380:2380 \
 -p 4001:4001 \
 -p 7001:7001 \
 elcolio/etcd:latest \
 -name etcd \
--discovery=https://discovery.etcd.io/78573ea75bd18d13ddabcf4bc300bbc0
+-discovery=DISCOVERY-ADDRESS-HERE
 ```
 
 ```console
-sudo docker service create --replicas 3 --network nodejs -p 3000:3000 --with-registry-auth username/repository:tag
+sudo docker service create --replicas 3 --mount src=cert,dst=/certificate --network nodejs -p 3000:3000 --with-registry-auth username/repository:tag
 ```
 
 Yuo should now be allow to access running container from http://address:3000/

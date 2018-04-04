@@ -1,8 +1,16 @@
 const cluster = require('cluster');
 const app = require('./app');
+const fs = require('fs');
+const https = require('https');
 const debug = require('debug')('app');
 
 const cpuCount = require('os').cpus().length; // Count the CPUs
+
+// setup certificates
+const options = {
+  cert: fs.readFileSync('/certificate/fullchain.pem'),
+  key: fs.readFileSync('/certificate/privkey.pem'),
+};
 
 // Log environment to console
 debug(`env: ${app.get('env')}`);
@@ -21,8 +29,6 @@ if (cluster.isMaster) {
     }
   });
 } else {
-  app.set('port', process.env.PORT || 3000);
-  const server = app.listen(app.get('port'), () => {
-    debug(`${process.pid}: Running → PORT ${server.address().port}`);
-  });
+  https.createServer(options, app).listen(8443);
+  debug('Server listening on port 8443');
 }

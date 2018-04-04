@@ -1,5 +1,4 @@
 const express = require('express');
-
 const bodyParser = require('body-parser');
 const errorHandlers = require('./handlers/errorHandlers');
 const routes = require('./routes/index');
