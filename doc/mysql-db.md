@@ -203,6 +203,14 @@ id=1	@172.31.42.160  (mysql-5.7.21 ndb-7.5.9)
 id=4	@172.31.36.196  (mysql-5.7.21 ndb-7.5.9)
 ```
 
+# Certificates
+
+Use certbot to create certificates
+
+Edit /etc/mysql/my.cnf and add the following lines to the [mysqld] section:
+ssl-cert=/etc/mysql/fullchain.pem
+ssl-key=/etc/mysql/privkey.pem
+
 # Create user and database
 
 Type following in sql node.

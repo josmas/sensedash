@@ -1,6 +1,5 @@
 // Update with your config settings.
 const config = require('./config/config');
-const fs = require('fs');
 
 module.exports = {
 

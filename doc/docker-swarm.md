@@ -102,7 +102,7 @@ sudo docker service create \
 --secret fullchain.pem \
 --secret privkey.pem \
 --network nodejs \
--p 8443:443 \
+-p 443:8443 \
 --with-registry-auth \
 username/repository:tag
 ```
