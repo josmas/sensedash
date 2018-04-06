@@ -89,10 +89,12 @@ elcolio/etcd:latest \
 -discovery=DISCOVERY-ADDRESS-HERE
 ```
 
+Docker secrets can be used by containers running in Docker swarm. You must use docker secrets to make certificate files created with certbot to be available inside containers.
+
 Create docker secrets
 ```console
-sudo docker secret create fullchain.pem fullchain.pem
-sudo docker secret create privkey.pem privkey.pem
+sudo docker secret create fullchain.pem /etc/letsencrypt/live/YOUR-DOMAIN-PATH/fullchain.pem
+sudo docker secret create privkey.pem /etc/letsencrypt/live/YOUR-DOMAIN-PATH/privkey.pem
 ```
 
 Create docker service
