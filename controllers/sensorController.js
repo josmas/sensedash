@@ -52,47 +52,47 @@ sensorController.addData = (req, res) => {
       success: false,
       message: 'Bad request: timestamp not defined.',
     });
-  } else if (!req.body.device_id) {
+  } else if (!req.body.deviceId) {
     res.status(400).json({
       success: false,
-      message: 'Bad request: device_id not defined.',
+      message: 'Bad request: deviceId not defined.',
     });
   } else if (!req.body.data) {
     res.status(400).json({
       success: false,
       message: 'Bad request: data not defined.',
     });
-  } else if (!req.body.table) {
+  } else if (!req.body.tableName) {
     res.status(400).json({
       success: false,
-      message: 'Bad request: table not defined.',
+      message: 'Bad request: tableName not defined.',
     });
   } else if (!isJson(req.body.data)) {
     res.status(400).json({
       success: false,
       message: 'Bad request: data field is not valid json data.',
     });
-  } else if (!validDeviceId(req.body.device_id)) {
+  } else if (!validDeviceId(req.body.deviceId)) {
     res.status(400).json({
       success: false,
-      message: 'Bad request: device_id field is not valid UUID 128bit.',
+      message: 'Bad request: deviceId field is not valid UUID 128bit.',
     });
   } else if (!isUnixTimestamp(req.body.timestamp)) {
     res.status(400).json({
       success: false,
       message: 'Bad request: timestamp field is not valid unix timestamp.',
     });
-  } else if (!isValidTableName(req.body.table)) {
+  } else if (!isValidTableName(req.body.tableName)) {
     res.status(400).json({
       success: false,
-      message: 'Bad request: table name is not valid.',
+      message: 'Bad request: tableName name is not valid.',
     });
   } else {
     // setTimeout(() => {
     // eslint-disable-next-line consistent-return
-    knex.schema.hasTable(req.body.table).then((exists) => {
+    knex.schema.hasTable(req.body.tableName).then((exists) => {
       if (!exists) { // create table
-        knex.raw(`CREATE TABLE ${req.body.table} ( id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY, timestamp VARCHAR(255) NOT NULL, device_id VARCHAR(255) NOT NULL, data MEDIUMTEXT )`)
+        knex.raw(`CREATE TABLE ${req.body.tableName} ( id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY, timestamp VARCHAR(255) NOT NULL, deviceId VARCHAR(255) NOT NULL, data MEDIUMTEXT )`)
           .then((rows) => {
             debug(rows);
           })
@@ -101,14 +101,14 @@ sensorController.addData = (req, res) => {
         /* return knex.schema.createTable(req.body.table, (t) => {
           t.increments('id').primary();
           t.string('timestamp', 100);
-          t.string('device_id', 100);
+          t.string('deviceId', 100);
           t.json('data');
         }); */
       }
     }).then(() => {
-      knex(req.body.table).insert({
+      knex(req.body.tableName).insert({
         timestamp: req.body.timestamp,
-        device_id: req.body.device_id,
+        deviceId: req.body.deviceId,
         data: req.body.data,
       })
         .then((data) => {
