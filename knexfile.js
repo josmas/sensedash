@@ -1,5 +1,6 @@
 // Update with your config settings.
 const config = require('./config/config');
+const fs = require('fs');
 
 module.exports = {
 
@@ -25,9 +26,9 @@ module.exports = {
       user: config.mysql_user,
       password: config.mysql_pass,
       ssl: {
-        // DO NOT DO THIS
-        // set up your ca correctly to trust the connection
-        rejectUnauthorized: false,
+        ca: fs.readFileSync('/run/secrets/ca.pem'),
+        key: fs.readFileSync('/run/secrets/client-key.pem'),
+        cert: fs.readFileSync('/run/secrets/client-cert.pem'),
       },
     },
     pool: {

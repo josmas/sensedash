@@ -95,6 +95,9 @@ Create docker secrets
 ```console
 sudo docker secret create fullchain.pem /etc/letsencrypt/live/YOUR-DOMAIN-PATH/fullchain.pem
 sudo docker secret create privkey.pem /etc/letsencrypt/live/YOUR-DOMAIN-PATH/privkey.pem
+sudo docker secret create ca.pem ca.pem
+sudo docker secret create client-cert.pem client-cert.pem
+sudo docker secret create client-key.pem client-key.pem
 ```
 
 Create docker service
@@ -103,6 +106,9 @@ sudo docker service create \
 --replicas 3 \
 --secret fullchain.pem \
 --secret privkey.pem \
+--secret ca.pem \
+--secret client-cert.pem \
+--secret client-key.pem \
 --network nodejs \
 -p 443:8443 \
 --with-registry-auth \
