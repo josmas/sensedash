@@ -61,7 +61,7 @@ describe('POST /insert', () => {
     chai.request(server)
       .post('/insert')
       .send([{
-        data: '{}',
+        data: validJson,
         deviceId: 'c2b15267-dbd0-434b-8c7c-ce33e3fc60d8',
         tableName: 'accelerometerDevice',
         timestamp: 1523371383870,
