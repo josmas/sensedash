@@ -47,47 +47,48 @@ function isValidTableName(str) {
 const sensorController = {};
 
 sensorController.addData = (req, res) => {
-  if (typeof req.body[0] === 'undefined') {
+
+  if (typeof req.body === 'undefined') {
     res.status(400).json({
       success: false,
       message: 'Bad request: body is not defined.',
     });
-  } else if (!req.body[0].timestamp) {
+  } else if (!req.body.timestamp) {
     res.status(400).json({
       success: false,
       message: 'Bad request: timestamp not defined.',
     });
-  } else if (!req.body[0].deviceId) {
+  } else if (!req.body.deviceId) {
     res.status(400).json({
       success: false,
       message: 'Bad request: deviceId not defined.',
     });
-  } else if (!req.body[0].data) {
+  } else if (!req.body.data) {
     res.status(400).json({
       success: false,
       message: 'Bad request: data not defined.',
     });
-  } else if (!req.body[0].tableName) {
+  } else if (!req.body.tableName) {
     res.status(400).json({
       success: false,
       message: 'Bad request: tableName not defined.',
     });
-  } else if (!isJson(req.body[0].data)) {
+  } else if (!isJson(req.body.data)) {
     res.status(400).json({
       success: false,
       message: 'Bad request: data field is not valid json data.',
     });
-  } else if (!validDeviceId(req.body[0].deviceId)) {
+  } else if (!validDeviceId(req.body.deviceId)) {
     res.status(400).json({
       success: false,
       message: 'Bad request: deviceId field is not valid UUID 128bit.',
     });
-  } else if (!isUnixTimestamp(req.body[0].timestamp.toString())) {
+  } else if (!isUnixTimestamp(req.body.timestamp.toString())) {
     res.status(400).json({
       success: false,
       message: 'Bad request: timestamp field is not valid unix timestamp.',
     });
-  } else if (!isValidTableName(req.body[0].tableName)) {
+  } else if (!isValidTableName(req.body.tableName)) {
     res.status(400).json({
       success: false,
       message: 'Bad request: tableName is not valid.',
@@ -95,7 +96,7 @@ sensorController.addData = (req, res) => {
   } else {
     // setTimeout(() => {
     // eslint-disable-next-line consistent-return
-    knex.schema.hasTable(req.body[0].tableName).then((exists) => {
+    knex.schema.hasTable(req.body.tableName).then((exists) => {
       if (!exists) { // create table (mysql)
         knex.raw(`CREATE TABLE ${req.body[0].tableName} ( id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY, timestamp VARCHAR(255) NOT NULL, deviceId VARCHAR(255) NOT NULL, data MEDIUMTEXT )`)
           .then((rows) => {
@@ -104,7 +105,7 @@ sensorController.addData = (req, res) => {
           .catch(err => debug(err));
 
         // Table creation for sqlite
-        /* return knex.schema.createTable(req.body[0].tableName, (t) => {
+         /*return knex.schema.createTable(req.body.tableName, (t) => {
             t.increments('id').primary();
             t.string('timestamp', 100);
             t.string('deviceId', 100);
@@ -112,10 +113,10 @@ sensorController.addData = (req, res) => {
           }); */
       }
     }).then(() => {
-      knex(req.body[0].tableName).insert({
-        timestamp: req.body[0].timestamp,
-        deviceId: req.body[0].deviceId,
-        data: req.body[0].data,
+      knex(req.body.tableName).insert({
+        timestamp: req.body.timestamp,
+        deviceId: req.body.deviceId,
+        data: req.body.data,
       })
         .then((dataid) => {
           res.status(201).json({ success: true });

@@ -60,12 +60,12 @@ describe('POST /insert', () => {
   it('should insert new valid data', (done) => {
     chai.request(server)
       .post('/insert')
-      .send([{
+      .send({
         data: validJson,
         deviceId: 'c2b15267-dbd0-434b-8c7c-ce33e3fc60d8',
         tableName: 'accelerometerDevice',
         timestamp: 1523371383870,
-      }])
+      })
       .end((err, res) => {
         res.should.have.status(201);
         // eslint-disable-next-line no-unused-expressions
@@ -80,11 +80,11 @@ describe('POST /insert', () => {
   it('should give error about missing table', (done) => {
     chai.request(server)
       .post('/insert')
-      .send([{
+      .send({
         data: '{}',
         deviceId: 'c2b15267-dbd0-434b-8c7c-ce33e3fc60d8',
         timestamp: 1523371383870,
-      }])
+      })
       .end((err, res) => {
         res.should.have.status(400);
         // eslint-disable-next-line no-unused-expressions
@@ -101,11 +101,11 @@ describe('POST /insert', () => {
   it('should give error about missing data', (done) => {
     chai.request(server)
       .post('/insert')
-      .send([{
+      .send({
         deviceId: 'c2b15267-dbd0-434b-8c7c-ce33e3fc60d8',
         tableName: 'accelerometerDevice',
         timestamp: 1523371383870,
-      }])
+      })
       .end((err, res) => {
         res.should.have.status(400);
         // eslint-disable-next-line no-unused-expressions
@@ -122,11 +122,11 @@ describe('POST /insert', () => {
   it('should give error about missing deviceId', (done) => {
     chai.request(server)
       .post('/insert')
-      .send([{
+      .send({
         data: '{}',
         tableName: 'accelerometerDevice',
         timestamp: 1523371383870,
-      }])
+      })
       .end((err, res) => {
         res.should.have.status(400);
         // eslint-disable-next-line no-unused-expressions
@@ -143,11 +143,11 @@ describe('POST /insert', () => {
   it('should give error about missing timestamp', (done) => {
     chai.request(server)
       .post('/insert')
-      .send([{
+      .send({
         data: '{}',
         deviceId: 'c2b15267-dbd0-434b-8c7c-ce33e3fc60d8',
         tableName: 'accelerometerDevice',
-      }])
+      })
       .end((err, res) => {
         res.should.have.status(400);
         // eslint-disable-next-line no-unused-expressions
@@ -164,12 +164,12 @@ describe('POST /insert', () => {
   it('should not allow empty table', (done) => {
     chai.request(server)
       .post('/insert')
-      .send([{
+      .send({
         data: '{}',
         deviceId: 'c2b15267-dbd0-434b-8c7c-ce33e3fc60d8',
         tableName: '',
         timestamp: 1523371383870,
-      }])
+      })
       .end((err, res) => {
         res.should.have.status(400);
         // eslint-disable-next-line no-unused-expressions
@@ -186,12 +186,12 @@ describe('POST /insert', () => {
   it('should not allow empty timestamp', (done) => {
     chai.request(server)
       .post('/insert')
-      .send([{
+      .send({
         data: '{}',
         deviceId: 'c2b15267-dbd0-434b-8c7c-ce33e3fc60d8',
         tableName: 'accelerometerDevice',
         timestamp: '',
-      }])
+      })
       .end((err, res) => {
         res.should.have.status(400);
         // eslint-disable-next-line no-unused-expressions
@@ -208,12 +208,12 @@ describe('POST /insert', () => {
   it('should not allow empty deviceId', (done) => {
     chai.request(server)
       .post('/insert')
-      .send([{
+      .send({
         data: '{}',
         deviceId: '',
         tableName: 'accelerometerDevice',
         timestamp: 1523371383870,
-      }])
+      })
       .end((err, res) => {
         res.should.have.status(400);
         // eslint-disable-next-line no-unused-expressions
@@ -230,12 +230,12 @@ describe('POST /insert', () => {
   it('should not allow empty data', (done) => {
     chai.request(server)
       .post('/insert')
-      .send([{
+      .send({
         data: '',
         deviceId: 'c2b15267-dbd0-434b-8c7c-ce33e3fc60d8',
         tableName: 'accelerometerDevice',
         timestamp: 1523371383870,
-      }])
+      })
       .end((err, res) => {
         res.should.have.status(400);
         // eslint-disable-next-line no-unused-expressions
@@ -252,12 +252,12 @@ describe('POST /insert', () => {
   it('should not allow invalid json data', (done) => {
     chai.request(server)
       .post('/insert')
-      .send([{
+      .send({
         data: invalidJson,
         deviceId: 'c2b15267-dbd0-434b-8c7c-ce33e3fc60d8',
         tableName: 'accelerometerDevice',
         timestamp: 1523371383870,
-      }])
+      })
       .end((err, res) => {
         res.should.have.status(400);
         // eslint-disable-next-line no-unused-expressions
@@ -274,12 +274,12 @@ describe('POST /insert', () => {
   it('should not allow invalid deviceId', (done) => {
     chai.request(server)
       .post('/insert')
-      .send([{
+      .send({
         data: '{}',
         deviceId: 'cf951349--447c-8764-c118fde9ed73',
         tableName: 'accelerometerDevice',
         timestamp: 1523371383870,
-      }])
+      })
       .end((err, res) => {
         res.should.have.status(400);
         // eslint-disable-next-line no-unused-expressions
@@ -296,12 +296,12 @@ describe('POST /insert', () => {
   it('should not allow invalid timestamp', (done) => {
     chai.request(server)
       .post('/insert')
-      .send([{
+      .send({
         data: '{}',
         deviceId: 'c2b15267-dbd0-434b-8c7c-ce33e3fc60d8',
         tableName: 'accelerometerDevice',
         timestamp: '12. March Year: 1997',
-      }])
+      })
       .end((err, res) => {
         res.should.have.status(400);
         // eslint-disable-next-line no-unused-expressions
@@ -318,12 +318,12 @@ describe('POST /insert', () => {
   it('should not allow invalid timestamp (negative number)', (done) => {
     chai.request(server)
       .post('/insert')
-      .send([{
+      .send({
         data: '{}',
         deviceId: 'c2b15267-dbd0-434b-8c7c-ce33e3fc60d8',
         tableName: 'accelerometerDevice',
         timestamp: -500,
-      }])
+      })
       .end((err, res) => {
         res.should.have.status(400);
         // eslint-disable-next-line no-unused-expressions
@@ -340,12 +340,12 @@ describe('POST /insert', () => {
   it('should not allow table names longer than 64', (done) => {
     chai.request(server)
       .post('/insert')
-      .send([{
+      .send({
         data: '{}',
         deviceId: 'c2b15267-dbd0-434b-8c7c-ce33e3fc60d8',
         tableName: 'qwertyuiopasdfghjklzqwertyuiopasdfghjklzqwertyuiopasdfghjklzqwertyuiopasdfghjklzqwertyuiopasdfghjklzqwertyuiopasdfghjklzqwertyuiopasdfghjklzqwertyuiopasdf',
         timestamp: 1523371383870,
-      }])
+      })
       .end((err, res) => {
         res.should.have.status(400);
         // eslint-disable-next-line no-unused-expressions
@@ -362,12 +362,12 @@ describe('POST /insert', () => {
   it('table name length of 64 should pass', (done) => {
     chai.request(server)
       .post('/insert')
-      .send([{
+      .send({
         data: '{}',
         deviceId: 'c2b15267-dbd0-434b-8c7c-ce33e3fc60d8',
         tableName: '1234567890123456789012345678901234567890123456789012345678901230',
         timestamp: 1523371383870,
-      }])
+      })
       .end((err, res) => {
         res.should.have.status(201);
         // eslint-disable-next-line no-unused-expressions
