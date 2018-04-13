@@ -25,7 +25,7 @@ module.exports = {
       user: config.mysql_user,
       password: config.mysql_pass,
       ssl: {
-        rejectUnauthorized: true,
+        rejectUnauthorized: false,
       },
     },
     pool: {
