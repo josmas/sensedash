@@ -86,9 +86,6 @@ sudo docker service create \
 --replicas 3 \
 --secret fullchain.pem \
 --secret privkey.pem \
---secret ca.pem \
---secret client-cert.pem \
---secret client-key.pem \
 --network nodejs \
 -p 443:8443 \
 --with-registry-auth \
