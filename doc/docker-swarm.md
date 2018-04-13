@@ -69,26 +69,6 @@ hixshfpdbib3        ingress             overlay             swarm
 c106df3625a6        none                null                local
 ```
 
-todo : write something about what is etcd and why it is needed
-```console
-[node1]$ curl -w "\n" 'https://discovery.etcd.io/new?size=1'
-https://discovery.etcd.io/78573ea75bd18d13ddabcf4bc300bbc0
-```
-
-```console
-[node1]$ sudo docker service create \
---name etcd \
---replicas 1 \
---network nodejs \
--p 2379:2379 \
--p 2380:2380 \
--p 4001:4001 \
--p 7001:7001 \
-elcolio/etcd:latest \
--name etcd \
--discovery=DISCOVERY-ADDRESS-HERE
-```
-
 Docker secrets can be used by containers running in Docker swarm. You must use docker secrets to make certificate files created with certbot to be available inside containers.
 
 Create docker secrets
