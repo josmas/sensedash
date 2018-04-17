@@ -11,7 +11,7 @@ app.use(bodyParser.json({
     try {
       JSON.parse(buf);
     } catch (e) {
-      res.send({
+      res.status(400).json({
         error: 'not valid json',
       });
     }

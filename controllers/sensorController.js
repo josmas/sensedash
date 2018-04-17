@@ -47,7 +47,6 @@ function isValidTableName(str) {
 const sensorController = {};
 
 sensorController.addData = (req, res) => {
-
   if (typeof req.body === 'undefined') {
     res.status(400).json({
       success: false,
@@ -105,7 +104,7 @@ sensorController.addData = (req, res) => {
           .catch(err => debug(err));
 
         // Table creation for sqlite
-         /*return knex.schema.createTable(req.body.tableName, (t) => {
+        /* return knex.schema.createTable(req.body.tableName, (t) => {
             t.increments('id').primary();
             t.string('timestamp', 100);
             t.string('deviceId', 100);
@@ -124,7 +123,7 @@ sensorController.addData = (req, res) => {
         });
     })
       .catch((error) => {
-        res.status(201).json({ success: false, message: 'Error: Database connection error.' });
+        res.status(500).json({ success: false, message: 'Error: Database connection error.' });
         debug(error);
       });
     // }, 0);
