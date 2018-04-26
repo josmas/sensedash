@@ -55,6 +55,14 @@ Example (replace with correct variables):
 }
 ```
 
+Certificates are necessary to run the server. The app expects the following files to exist in the node container:
+```
+  /run/secrets/fullchain.pem
+  /run/secrets/privkey.pem
+```
+
+The location and names of the files can be customised in [start.js](start.js). The files can be hosted locally within the app in a folder called `./sslcert/` which is already added to .gitignore.
+
 Build dockerimage with following command:
 ```console
 docker build -t nodejs-server .
@@ -71,7 +79,7 @@ docker run -it --rm -p 3000:3000 --name server nodejs-server
 
 ### Installation using docker-compose
 
-You can also use docker-compose to run.
+You can also use docker-compose to run. If certificates exist in `./sslcert/` they will be mapped to the appropriate path in the container.
 
 ```console
 docker-compose up
