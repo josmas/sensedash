@@ -97,7 +97,7 @@ sensorController.addData = (req, res) => {
     // eslint-disable-next-line consistent-return
     knex.schema.hasTable(req.body.tableName).then((exists) => {
       if (!exists) { // create table (mysql)
-        knex.raw(`CREATE TABLE ${req.body.tableName} ( id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY, timestamp VARCHAR(255) NOT NULL, deviceId VARCHAR(255) NOT NULL, data MEDIUMTEXT )`)
+        knex.raw(`CREATE TABLE ${req.body.tableName} ( id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY, timestamp INTEGER NOT NULL, deviceId VARCHAR(255) NOT NULL, data MEDIUMTEXT )`)
           .then((rows) => {
             debug(rows);
           })
@@ -106,7 +106,7 @@ sensorController.addData = (req, res) => {
         // Table creation for sqlite
         /* return knex.schema.createTable(req.body.tableName, (t) => {
             t.increments('id').primary();
-            t.string('timestamp', 100);
+            t.integer('timestamp', 100);
             t.string('deviceId', 100);
             t.json('data');
           }); */
