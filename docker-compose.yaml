@@ -26,8 +26,9 @@ services:
       - DB_PASSWORD=abc123
     volumes:
       - ./:/home/node/app
+      - ./sslcert/:/run/secrets/
     ports:
-          - "3000:3000"
+          - "8443:8443"
     depends_on:
         db:
              condition: service_healthy
