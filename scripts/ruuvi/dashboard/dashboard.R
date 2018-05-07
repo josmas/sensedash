@@ -30,10 +30,7 @@ for (i in 1:N) {
   temperature <- fromJSON(json_data[i])$temperature
   pressure <- fromJSON(json_data[i])$pressure
   humidity <- fromJSON(json_data[i])$humidity
-  #print(timestamp)
-  #print(temperature)
-  #print(pressure)
-  #print(humidity)
+
   if(is.null(timestamp)){
     timestamp <- ""
   }
@@ -60,16 +57,9 @@ last_month <- subset(df2, timestamp > last_month_time )
 sidebar <- dashboardSidebar(
   sidebarMenu(
     # Create two `menuItem()`s, "Dashboard" and "Inputs"
-    menuItem(text = "Humidity",
-             tabName = "humidity"
-    ), 
-    menuItem(text = "Temperature", 
-             tabName = "temperature"
-
-    ),
-    menuItem(text = "Pressure", 
-             tabName = "pressure"
-             )
+    menuItem(text = "general",
+             tabName = "general"
+    )
   )
 )
 header <- dashboardHeader()
@@ -77,35 +67,24 @@ body <- dashboardBody(
   
   tabItems(
     
-    tabItem(tabName = "humidity" ,
-            h2("monthly"),
-            plotOutput(outputId = "humidity"),
-            h2("day"),
-            plotOutput(outputId = "humidity_day")
-    ),
-    
-    tabItem(tabName = "temperature",
-            h2("monthly"),
-            plotOutput(outputId = "temperature"),
-            h2("day"),
-            plotOutput(outputId = "temperature_day")
-    ),
-    
-    tabItem(tabName = "pressure", 
-            h2("month"),
-            plotOutput(outputId = "pressure"),
-            h2("day"),
-            plotOutput(outputId = "pressure_day")
+    tabItem(tabName = "general",
+            h2("general"),
+            plotOutput(outputId = "linePlot"),
+            selectInput(inputId = "time", 
+                        label = "Time:",
+                        choices = c("Month" = "last_month", 
+                                    "Day" = "last_day"),
+                        selected = "last_month"),
+            selectInput(inputId = "y", 
+                        label = "Variable:",
+                        choices = c("Temperature" = "temperature", 
+                                    "Humidity" = "humidity",
+                                    "Pressure" = "pressure"),
+                        selected = "temperature")
     )
     
   )
-  
-  # Outputs
-  ##mainPanel(
-    ##plotOutput(outputId = "humidity"),
-    ##plotOutput(outputId = "temperature"),
-    ##plotOutput(outputId = "pressure")
-  #)
+
   
 )
 
@@ -116,43 +95,18 @@ ui <- dashboardPage(header = header,
 
 server <- function(input, output) {
   
-  # monthly
-  output$humidity <- renderPlot({
+  output$plots <- renderPlot({
     
-    ggplot(data = last_month, aes_string(x = "timestamp", y = "humidity")) +
+    ggplot(data = eval(parse(text = input$time)), aes_string(x = "timestamp", y = input$y, color=input$y)) +
       geom_point() + geom_line() + theme(axis.text.x = element_text(angle = 90, hjust = 1))
   })
   
-  output$temperature <- renderPlot({
+  output$linePlot <- renderPlot({
     
-    ggplot(data = last_month, aes_string(x = "timestamp", y = "temperature")) +
+    ggplot(data = eval(parse(text = input$time)), aes_string(x = "timestamp", y = input$y, color=input$y)) +
       geom_point() + geom_line() + theme(axis.text.x = element_text(angle = 90, hjust = 1))
   })
-  
-  output$pressure <- renderPlot({
-    
-    ggplot(data = last_month, aes_string(x = "timestamp", y = "pressure")) +
-      geom_point() + geom_line() + theme(axis.text.x = element_text(angle = 90, hjust = 1))
-  })
-  
-  # daily
-  output$humidity_day <- renderPlot({
-    
-    ggplot(data = last_day, aes_string(x = "timestamp", y = "humidity")) +
-      geom_point() + geom_line() + theme(axis.text.x = element_text(angle = 90, hjust = 1))
-  })
-  
-  output$pressure_day <- renderPlot({
-    
-    ggplot(data = last_day, aes_string(x = "timestamp", y = "pressure")) +
-      geom_point() + geom_line() + theme(axis.text.x = element_text(angle = 90, hjust = 1))
-  })
-  
-  output$temperature_day <- renderPlot({
-    
-    ggplot(data = last_day, aes_string(x = "timestamp", y = "temperature")) +
-      geom_point() + geom_line() + theme(axis.text.x = element_text(angle = 90, hjust = 1))
-  })
+
 }
 
 shinyApp(ui, server)
