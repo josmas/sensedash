@@ -57,33 +57,28 @@ last_month <- subset(df2, timestamp > last_month_time )
 sidebar <- dashboardSidebar(
   sidebarMenu(
     # Create two `menuItem()`s, "Dashboard" and "Inputs"
-    menuItem(text = "general",
-             tabName = "general"
-    )
-  )
+    menuItem(text = "Temperature",
+             tabName = "temperature"
+    ),
+    menuItem(text = "Pressure",
+             tabName = "pressure"
+    ),
+    menuItem(text = "Humidity",
+             tabName = "humidity"
+    ),
+    id = "sbMenu"
+  ),
+  selectInput(inputId = "time", 
+              label = "Time:",
+              choices = c("Month" = "last_month", 
+                          "Day" = "last_day"),
+              selected = "last_month")
 )
 header <- dashboardHeader()
 body <- dashboardBody(
   
-  tabItems(
-    
-    tabItem(tabName = "general",
-            h2("general"),
-            plotOutput(outputId = "linePlot"),
-            selectInput(inputId = "time", 
-                        label = "Time:",
-                        choices = c("Month" = "last_month", 
-                                    "Day" = "last_day"),
-                        selected = "last_month"),
-            selectInput(inputId = "y", 
-                        label = "Variable:",
-                        choices = c("Temperature" = "temperature", 
-                                    "Humidity" = "humidity",
-                                    "Pressure" = "pressure"),
-                        selected = "temperature")
-    )
-    
-  )
+  h2("Plot"),
+  plotOutput(outputId = "linePlot")
 
   
 )
@@ -95,16 +90,10 @@ ui <- dashboardPage(header = header,
 
 server <- function(input, output) {
   
-  output$plots <- renderPlot({
-    
-    ggplot(data = eval(parse(text = input$time)), aes_string(x = "timestamp", y = input$y, color=input$y)) +
-      geom_point() + geom_line() + theme(axis.text.x = element_text(angle = 90, hjust = 1))
-  })
-  
   output$linePlot <- renderPlot({
     
-    ggplot(data = eval(parse(text = input$time)), aes_string(x = "timestamp", y = input$y, color=input$y)) +
-      geom_point() + geom_line() + theme(axis.text.x = element_text(angle = 90, hjust = 1))
+    ggplot(data = eval(parse(text = input$time)), aes_string(x = "timestamp", y = input$sbMenu, color= "deviceId")) +
+      geom_point() + geom_line() + theme(axis.text.x = element_text(angle = 90, hjust = 1)) + facet_wrap(~deviceId)
   })
 
 }
