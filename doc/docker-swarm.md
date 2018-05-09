@@ -4,7 +4,7 @@ With Docker swarm mode it is possible to manage containers across multiple host 
 
 In this example three t2.micro nodes are created in AWS EC2. It is necessary to allow nodes to communicate with each others within same security group.
 
-You should already have built Docker image of sensedash nodejs component. You should push image to Docker cloud. Later you can fetch image from AWS server. Execute following in your local host and replace with corrent variables.
+You should already have built Docker image of sensedash nodejs component. You should push image to Docker cloud. Later you can fetch image from AWS server. Execute following in your local host and replace with correct variables.
 ```console
 docker tag image username/sensedash-server:tag
 docker push username/sensedash-server:tag
