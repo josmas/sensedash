@@ -69,3 +69,6 @@ dev.sqlite3
 
 # ssl certificates
 sslcert/*
+
+# mac users
+.DS_Store
